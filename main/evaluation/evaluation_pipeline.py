@@ -786,14 +786,14 @@ Nota: la risposta può essere lunga e strutturata in sezioni — "
 
 Esempi calibrati:
 
-Query: "Qual è l'email di GMR Enlights e chi è il referente?"
-Risposta: "L'email è info@gmrenlights.com."
+Query: "Qual è l'email del fornitore Acme SRL e chi è il referente commerciale?"
+Risposta: "L'email è info@acme-example.com."
 Ragionamento: La risposta fornisce l'email ma non risponde alla domanda sul referente, che era esplicitamente richiesto.
 Voto: 1
 
-Query: "Come funziona il calcolo delle spese di trasporto per Logos SPA?"
+Query: "Come funziona il calcolo delle spese di trasporto per i clienti in zona remota?"
 Risposta: "Le spese di trasporto dipendono dal corriere scelto e dalle tariffe di mercato."
-Ragionamento: La risposta parla di spese di trasporto in generale ma non affronta la logica implementata in SAM ERP2 né il caso specifico di Logos SPA. Non contiene nulla di utile per rispondere alla domanda.
+Ragionamento: La risposta parla di spese di trasporto in generale ma non affronta la logica specifica implementata nel sistema per la zona remota.
 Voto: 0
 
 Query: "Come si configura la periodicità di liquidazione degli interessi per conto banca?"
@@ -801,9 +801,9 @@ Risposta: "La periodicità si configura per ogni conto banca con diverse opzioni
 Ragionamento: La risposta copre direttamente la configurazione della periodicità con tutte le opzioni richieste.
 Voto: 2
 
-Query: "Qual è la logica di reperimento dello sconto sulle righe di ordine per MVM srl con classificatore 5?"
-Risposta: "### Logica sconto per MVM srl\n\n**Classificatore 5 e sconto massimo**\n- Gli articoli sono raggruppati tramite classificatore generico 5 [1].\n- È presente un campo 'sconto massimo' nella tabella del classificatore.\n\n**Priorità listino personalizzato**\n- Il listino personalizzato del cliente ha sempre la precedenza sugli sconti standard [2].\n- Se i codici non hanno sconto sul listino, viene applicata la logica del classificatore 5 [1][2].\n\nDocumenti di riferimento:\n1. RI: [46443] ...\n2. RI: [46444] ..."
-Ragionamento: La risposta è lunga e strutturata in sezioni, ma affronta direttamente tutti gli aspetti della query: il ruolo del classificatore 5, la logica dello sconto massimo e la priorità del listino personalizzato. La struttura markdown non riduce la pertinenza.
+Query: "Qual è la logica di reperimento dello sconto sulle righe di ordine per clienti con listino personalizzato?"
+Risposta: "### Logica sconto per clienti con listino personalizzato\n\n**Priorità listino personalizzato**\n- Il listino personalizzato del cliente ha sempre la precedenza sugli sconti standard [1].\n- Se i codici non hanno sconto sul listino, viene applicata la logica del classificatore generico [1][2].\n\nDocumenti di riferimento:\n1. DOC: [1001] ...\n2. DOC: [1002] ..."
+Ragionamento: La risposta è lunga e strutturata in sezioni, ma affronta direttamente tutti gli aspetti della query: la priorità del listino personalizzato e la logica di fallback. La struttura markdown non riduce la pertinenza.
 Voto: 2
 
 ---
