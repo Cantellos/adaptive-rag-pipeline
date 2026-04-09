@@ -5,8 +5,17 @@ import numpy as np
 import tempfile
 import os
 import re
-import fitz  
-import win32com.client as win32
+import fitz
+
+# win32com is only available on Windows. Import lazily so the module can be
+# imported on Linux/macOS without raising ImportError.  Legacy .doc → .docx
+# conversion will raise a clear RuntimeError if attempted on non-Windows.
+try:
+    import win32com.client as win32
+    _WIN32_AVAILABLE = True
+except ImportError:
+    win32 = None  # type: ignore
+    _WIN32_AVAILABLE = False
 
 # Pulizia parti inutili del testo prima del chunking
 def remove_placeholders(text: str) -> str:
@@ -90,7 +99,15 @@ def extract_text_from_varbinary(file_data, extension, numero, reader):
             os.remove(tmp_path)
 
         # Caso 3: DOC (converti in DOCX con Word e gestisci come DOCX)
+        # NOTE: .doc conversion requires Microsoft Word (Windows only).
+        # Install pywin32 manually: pip install pywin32
         elif ext == ".doc":
+            if not _WIN32_AVAILABLE:
+                raise RuntimeError(
+                    ".doc files require pywin32 and Microsoft Word (Windows only). "
+                    "Convert the file to .docx first, or run the ingestion on Windows."
+                )
+
             with tempfile.NamedTemporaryFile(delete=False, suffix=".doc") as tmp:
                 tmp.write(file_data)
                 tmp_doc_path = tmp.name
