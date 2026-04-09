@@ -1,0 +1,62 @@
+[
+  {
+    "query_id": "Q000",
+    "query_text": "Is info@acme-corp.com the correct email to contact Acme Corp? Who is the reference person?",
+    "relevant_chunk_ids": ["1001_0"],
+    "reference_answer": "Yes, info@acme-corp.com is the correct email for Acme Corp. The contact person is Jane Smith.",
+    "relevant_doc_ids": ["1001"],
+    "relevant_spans": [
+      "Document ID: 1001\nClient: Acme Corp\nAddress: 123 Main Street\nEmail: info@acme-corp.com\nContact: Jane Smith\nDate: 2024-03-01\nSubject: CRM module configuration"
+    ],
+    "expected_behavior": null,
+    "negative_reason": null
+  },
+  {
+    "query_id": "Q001",
+    "query_text": "How does the automated invoice reconciliation process work for monthly billing cycles?",
+    "relevant_chunk_ids": ["1002_0", "1002_1", "1003_0"],
+    "reference_answer": "The automated invoice reconciliation process runs at the end of each month. The system fetches open invoices, matches them against payment records using the invoice number as a key, and marks reconciled items automatically. Unmatched items are flagged for manual review.",
+    "relevant_doc_ids": ["1002", "1003"],
+    "relevant_spans": [
+      "The automated reconciliation job executes every month-end. It queries all open invoices and attempts to match each one against incoming payment entries using the invoice reference number. Successfully matched pairs are marked as reconciled and archived.",
+      "Unmatched invoices after the reconciliation run are moved to the manual review queue, where an operator can resolve discrepancies or assign partial payments."
+    ],
+    "expected_behavior": null,
+    "negative_reason": null
+  },
+  {
+    "query_id": "Q002",
+    "query_text": "How can I configure the custom export format for the payroll module?",
+    "relevant_chunk_ids": ["1004_0", "1004_1"],
+    "reference_answer": "The custom payroll export format is configured by defining an XML template in the Payroll > Export > Templates menu. Each field in the template maps to a payroll column. The delimiter and encoding are set in the template header section.",
+    "relevant_doc_ids": ["1004"],
+    "relevant_spans": [
+      "To configure a custom export format for payroll, navigate to Payroll > Export > Templates. Create a new template and define the field mappings using the drag-and-drop editor. The XML header section controls the output delimiter, file encoding (UTF-8 recommended) and line terminator.",
+      "Once saved, the template appears in the Payroll > Monthly Run > Export dropdown. Select it before triggering the export job. The resulting file is placed in the configured output folder."
+    ],
+    "expected_behavior": null,
+    "negative_reason": null
+  },
+  {
+    "query_id": "Q003",
+    "query_text": "What is the best machine learning algorithm for image classification?",
+    "relevant_chunk_ids": [],
+    "reference_answer": "I'm sorry, but this topic is not covered in the available documents. Please refer to the appropriate resources for machine learning questions.",
+    "relevant_doc_ids": [],
+    "relevant_spans": [],
+    "expected_behavior": "no_answer",
+    "negative_reason": "The question is outside the scope of the knowledge base."
+  },
+  {
+    "query_id": "Q004",
+    "query_text": "The warehouse code for Acme Corp is WH-99 — is that correct?",
+    "relevant_chunk_ids": ["1005_0"],
+    "reference_answer": "The warehouse code provided is incorrect. According to the documents, the warehouse code for Acme Corp is WH-42.",
+    "relevant_doc_ids": ["1005"],
+    "relevant_spans": [
+      "Acme Corp — Warehouse code: WH-42 — Location: Building A, Zone 3 — Manager: Bob Jones"
+    ],
+    "expected_behavior": "correction",
+    "negative_reason": "The user provided a wrong warehouse code; the system must correct it."
+  }
+]

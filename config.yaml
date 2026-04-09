@@ -1,0 +1,97 @@
+# ============================================================
+# Adaptive Multi-Stage RAG System — Configuration File
+# ============================================================
+# Edit this file to adapt the system to your own domain and
+# document base. All non-secret settings live here.
+# Secrets (API keys, DB credentials) belong in .env.
+# ============================================================
+
+# ---- Application UI ----------------------------------------
+app:
+  title: "Document RAG Assistant"
+  icon: "📄"
+  logo_url: ""                      # Optional URL to a logo image (leave empty to hide)
+  welcome_message: >
+    Welcome! I am your document assistant.
+    I can help you find information in your knowledge base.
+  disclaimer: >
+    Always verify the results! Check the source documents
+    referenced at the bottom of each answer.
+
+# ---- Domain ------------------------------------------------
+# Describe the knowledge domain the system operates in.
+# These values are injected into the LLM prompts automatically.
+domain:
+  name: "Your Software / System"          # e.g. "SAM ERP2", "Confluence Wiki", "Legal Corpus"
+  description: >
+    A software platform for managing enterprise workflows,
+    including sales, warehouse, accounting and payroll modules.
+  # How individual documents are called in your knowledge base.
+  # This affects prompt wording ("find relevant Documents", etc.)
+  document_type: "Document"               # e.g. "RI", "Ticket", "Article", "Manual"
+  # URL template used to build clickable links in answers.
+  # Use {id} as placeholder for the document numeric ID.
+  # Leave empty if your documents have no external URL.
+  document_url_template: ""               # e.g. "https://your-intranet/docs/{id}"
+  # Language used for BM25 keyword search (stemmer + stopwords).
+  # Supported values: italian, english, french, spanish, german, portuguese, ...
+  language: "english"
+  # Short description of what is OUT of scope for this system.
+  # Used in the tool-selection prompt to reject off-topic queries.
+  out_of_scope_description: >
+    topics unrelated to {domain_name} or its features and customisations
+
+# ---- Retrieval ---------------------------------------------
+retrieval:
+  default_top_k: 15           # Candidate documents fetched per retriever
+  max_selected_docs: 15       # Max documents kept after LLM selection step
+  # Cosine similarity threshold below which a chunk is considered a
+  # near-copy of the blank document template and is discarded.
+  template_similarity_threshold: 0.9
+
+# ---- Chunking (used by the ingestion pipeline) -------------
+chunking:
+  strategy: "recursive"       # "recursive" | "fixed"
+  chunk_size: 1024
+  chunk_overlap: 150
+
+# ---- Input mode --------------------------------------------
+# "database" : documents are fetched from SQL Server (VAR_RICSW / DocumentFiles tables).
+# "folder"   : documents are read from a local directory (see folder_input below).
+input:
+  mode: "folder"              # "database" | "folder"
+
+# Settings used when input.mode = "folder"
+folder_input:
+  path: "./documents"         # Path to the folder containing your source documents
+  supported_extensions:
+    - ".pdf"
+    - ".docx"
+  # Optional: path to a JSON metadata manifest.
+  # If provided, the system reads document metadata (title, author, etc.) from it.
+  # Format: { "filename.pdf": { "title": "...", "author": "...", "id": "..." }, ... }
+  # If not provided, metadata is inferred from filenames.
+  metadata_manifest: ""       # e.g. "./documents/metadata.json"
+
+# ---- Database (table names only — credentials go in .env) --
+# Only relevant when input.mode = "database".
+database:
+  # Table that stores processed text chunks + embeddings (required in both modes)
+  chunks_table: "DocumentChunks"
+  # Tables used to read raw source documents (only in "database" mode)
+  source_variables_table: "VAR_RICSW"
+  source_files_table: "DocumentFiles"
+
+# ---- LLM prompts (optional overrides) ----------------------
+# Leave a value as null to use the built-in default prompt for that step.
+# Set a string to fully replace the system prompt for that pipeline step.
+# Available substitution tokens (automatically replaced at runtime):
+#   {domain_name}          → domain.name
+#   {domain_description}   → domain.description
+#   {document_type}        → domain.document_type
+#   {out_of_scope}         → domain.out_of_scope_description
+prompts:
+  decide_tools: null          # System prompt for Step 1 (tool selection)
+  select_documents: null      # System prompt for Step 2 (document filtering)
+  generate_answer: null       # System prompt for Step 3 (answer generation)
+  summarize_history: null     # System prompt for chat history summarisation

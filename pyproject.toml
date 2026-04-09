@@ -1,0 +1,42 @@
+[project]
+name = "progetto-di-tesi"
+version = "0.1.0"
+description = "Progetto di tesi: Motore di ricerca semantico integrato con LLM e BPM"
+authors = [{ name = "Andrea Cantelli" }]
+readme = "README.md"
+requires-python = ">=3.9"
+
+dependencies = [
+    "openai",
+    "langchain>0.1.85",
+    "langchain-community",
+    "langchain-openai",
+    "pyodbc",
+    "pandas==2.3.3",              
+    "python-dotenv",
+    "tqdm",
+    "easyocr",
+    "pillow",
+    "python-docx",
+    "PyMuPDF",
+    "streamlit",
+    "python-dateutil==2.8.2",
+    "rank_bm25",
+    "pywin32",
+    "bm25s",
+    "nltk",
+    "ragas",
+    "datasets==2.19.1",
+    "llama_index",
+    "six==1.16.0",
+    "rapidfuzz",
+    "langchain_experimental",
+    "numpy"   
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["main", "chat_history"]
