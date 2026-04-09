@@ -1,18 +1,20 @@
 [project]
-name = "progetto-di-tesi"
+name = "adaptive-rag-pipeline"
 version = "0.1.0"
-description = "Progetto di tesi: Motore di ricerca semantico integrato con LLM e BPM"
+description = "Adaptive multi-stage RAG pipeline for document Q&A and decision support"
 authors = [{ name = "Andrea Cantelli" }]
 readme = "README.md"
 requires-python = ">=3.9"
 
 dependencies = [
-    "openai",
-    "langchain>0.1.85",
+    "openai>=1.0",
+    "pyyaml",
+    "tiktoken",
+    "langchain>=0.1.85",
     "langchain-community",
     "langchain-openai",
+    "langchain-text-splitters",
     "pyodbc",
-    "pandas==2.3.3",              
     "python-dotenv",
     "tqdm",
     "easyocr",
@@ -20,23 +22,26 @@ dependencies = [
     "python-docx",
     "PyMuPDF",
     "streamlit",
-    "python-dateutil==2.8.2",
-    "rank_bm25",
-    "pywin32",
     "bm25s",
     "nltk",
     "ragas",
-    "datasets==2.19.1",
-    "llama_index",
-    "six==1.16.0",
     "rapidfuzz",
-    "langchain_experimental",
-    "numpy"   
+    "numpy",
 ]
+
+# pywin32 is only required on Windows for legacy .doc → .docx conversion.
+# Install it manually on Windows if you need to ingest .doc files:
+#   pip install pywin32
+#
+# Optional / evaluation-only packages (uncomment to install):
+#   "datasets",
+#   "llama_index",
+#   "rank_bm25",
+#   "langchain_experimental",
 
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["main", "chat_history"]
+packages = ["main"]
