@@ -43,5 +43,8 @@ testset_ragas.json
 *.DS_Store
 Thumbs.db
 
+# ── Cowork / Claude project instructions (local tool metadata, not for public repo)
+CLAUDE.md
+
 # Development backup files (superseded by main/llm/ and main/evaluation/)
 main/BACKUP/
