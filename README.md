@@ -1,5 +1,9 @@
 # Adaptive Multi-Stage RAG System
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.9%2B-blue)](pyproject.toml)
+[![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B)](https://streamlit.io)
+
 A **domain-agnostic, multi-stage Retrieval-Augmented Generation (RAG) pipeline** for intelligent document Q&A and decision support.
 
 The system combines semantic vector search, BM25 keyword search, and LLM-based filtering to adaptively retrieve and present information from a custom document knowledge base. An interactive Streamlit chat interface lets users query the knowledge base in natural language with cited, source-grounded answers.
@@ -187,7 +191,7 @@ database:
   chunks_table:           "DocumentChunks"  # output table (always required)
 ```
 
-See `docs/database_schema.md` for the expected table structure.
+See [`docs/database_schema.md`](docs/database_schema.md) for the full schema reference, or run [`docs/create_tables.sql`](docs/create_tables.sql) to create the tables directly.
 
 ---
 

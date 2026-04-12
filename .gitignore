@@ -21,6 +21,11 @@ uv.lock
 chat_history/
 users.json
 
+# ── Source documents (user data — never commit) ──────────────────────────────
+# Keep the folder itself (tracked via .gitkeep) but ignore its contents.
+documents/*
+!documents/.gitkeep
+
 # ── BM25 reverse index (rebuilt at runtime by the ingestion pipeline) ─────────
 reverse_index/
 
