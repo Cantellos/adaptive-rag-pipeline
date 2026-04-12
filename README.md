@@ -341,4 +341,4 @@ If you use this work in your research, please cite:
 
 ## License
 
-This project is released under the [MIT License](LICENSE).
+This project is released under the [GPL-3.0 License](LICENSE).
