@@ -10,6 +10,9 @@ The system combines semantic vector search, BM25 keyword search, and LLM-based f
 
 Developed as a Master's thesis project at the University of Ferrara (Università degli Studi di Ferrara).
 
+> **⚠️ SQL Server 2022 required for semantic search.**  
+> The vector similarity search relies on the `VECTOR` type and `VECTOR_DISTANCE()` function introduced in SQL Server 2022 (16.x). If you don't have SQL Server 2022, BM25 keyword search still works standalone — only the semantic retrieval stage will be unavailable.
+
 ---
 
 ## Architecture
@@ -337,7 +340,8 @@ If you use this work in your research, please cite:
   author  = {Cantelli, Andrea},
   title   = {Adaptive Multi-Stage RAG Architecture for Decision Support},
   school  = {Università degli Studi di Ferrara},
-  year    = {2026}
+  year    = {2026},
+  url     = {https://github.com/Cantellos/adaptive-rag-pipeline}
 }
 ```
 
