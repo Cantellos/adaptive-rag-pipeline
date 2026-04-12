@@ -84,8 +84,8 @@ User Query
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/your-username/adaptive-rag-system.git
-cd adaptive-rag-system
+git clone https://github.com/Cantellos/adaptive-rag-pipeline.git
+cd adaptive-rag-pipeline
 
 # With uv (recommended)
 uv sync
